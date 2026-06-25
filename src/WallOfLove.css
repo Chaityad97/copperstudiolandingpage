@@ -317,8 +317,11 @@
   }
   .wall-card {
     min-width: 85vw;
+    width: 85vw;
+    max-width: 85vw;
     scroll-snap-align: center;
     flex-shrink: 0;
+    white-space: normal;
   }
   .card-span-2 {
     grid-column: auto;
