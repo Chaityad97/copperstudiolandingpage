@@ -165,6 +165,9 @@ function App() {
     };
   }, []);
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
   return (
     <>
       {/* Navigation Bar */}
@@ -173,7 +176,7 @@ function App() {
           <img src={logoImg} alt="Copper Studio Logo" className="nav-logo-icon" />
         </div>
         
-        <div className="nav-links">
+        <div className="nav-links desktop-only">
           <a href="#home" className="active">Home</a>
           <a href="#about">About</a>
           <a href="#services">Services</a>
@@ -182,7 +185,7 @@ function App() {
           <a href="#contact">Contact</a>
         </div>
         
-        <div className="nav-action">
+        <div className="nav-action desktop-only">
           <button className="lets-talk-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 20h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -191,7 +194,42 @@ function App() {
             Let's Talk &rsaquo;
           </button>
         </div>
+
+        {/* Hamburger Menu Button */}
+        <button className="mobile-menu-btn" onClick={toggleMobileMenu} aria-label="Toggle mobile menu">
+          {isMobileMenuOpen ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          )}
+        </button>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className="mobile-nav-links">
+          <a href="#home" onClick={toggleMobileMenu}>Home</a>
+          <a href="#about" onClick={toggleMobileMenu}>About</a>
+          <a href="#services" onClick={toggleMobileMenu}>Services</a>
+          <a href="#projects" onClick={toggleMobileMenu}>Projects</a>
+          <a href="#testimonials" onClick={toggleMobileMenu}>Testimonials</a>
+          <a href="#contact" onClick={toggleMobileMenu}>Contact</a>
+          <button className="lets-talk-btn mobile-lets-talk">
+             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 20h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Let's Talk &rsaquo;
+          </button>
+        </div>
+      </div>
 
       <div className="landing-container">
         {/* Background blobs / ellipses */}
