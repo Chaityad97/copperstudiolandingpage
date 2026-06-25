@@ -117,11 +117,11 @@
 /* --- Marquee Animation --- */
 @keyframes marqueeScroll {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    /* Translate exactly half the width of the content (which is exactly one image) to create a perfect infinite loop */
-    transform: translateX(-50%);
+    /* Translate exactly half the width of the content to create a perfect infinite loop */
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -140,6 +140,7 @@
   width: max-content;
   /* Adjust the 15s down if you want it faster, up if you want it slower */
   animation: marqueeScroll 15s linear infinite;
+  will-change: transform;
 }
 
 .footer-large-text {

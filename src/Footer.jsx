@@ -83,8 +83,6 @@ const Footer = () => {
           <div className="marquee-content">
             <img src={footerText} alt="Copper Studio" className="footer-large-text" />
             <img src={footerText} alt="Copper Studio" className="footer-large-text" />
-            <img src={footerText} alt="Copper Studio" className="footer-large-text" />
-            <img src={footerText} alt="Copper Studio" className="footer-large-text" />
           </div>
         </div>
 
