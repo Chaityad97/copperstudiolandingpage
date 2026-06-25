@@ -12,7 +12,7 @@
 }
 
 .wall-title {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 800;
   color: #070815;
@@ -21,7 +21,7 @@
 }
 
 .wall-subtitle {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(16px, 2vw, 20px);
   color: #4A4A4A;
   margin: 0 0 60px 0;
@@ -156,7 +156,7 @@
 }
 
 .testimonial-text {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 500;
   color: #070815;
@@ -185,7 +185,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', sans-serif;
+
   font-size: 16px;
   font-weight: 700;
 }
@@ -199,7 +199,7 @@
 }
 
 .author-name {
-  font-family: 'Inter', sans-serif;
+
   font-size: 16px;
   font-weight: 700;
   color: #070815;
@@ -207,14 +207,14 @@
 }
 
 .author-role {
-  font-family: 'Inter', sans-serif;
+
   font-size: 14px;
   color: #666666;
   margin: 0;
 }
 
 .client-logo {
-  font-family: 'Inter', sans-serif;
+
   font-size: 16px;
   font-weight: 700;
   color: #8D8C89;
@@ -229,7 +229,7 @@
 }
 
 .stat-value {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(52px, 6vw, 76px);
   font-weight: 800;
   line-height: 1;
@@ -238,7 +238,7 @@
 }
 
 .stat-label {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(14px, 1.5vw, 16px);
   font-weight: 600;
   line-height: 1.4;
@@ -252,7 +252,7 @@
 }
 
 .client-logo-sm {
-  font-family: 'Inter', sans-serif;
+
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.5px;

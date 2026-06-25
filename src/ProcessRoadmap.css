@@ -19,7 +19,7 @@
   position: absolute;
   top: 0;
   left: 2%;
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 800;
   color: #070815;
@@ -51,7 +51,7 @@
 }
 
 .process-s-text h3 {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(15px, 1.55vw, 21px);
   font-weight: 700;
   color: #1A1A1A;
@@ -61,7 +61,7 @@
 }
 
 .process-s-text p {
-  font-family: 'Inter', sans-serif;
+
   font-size: clamp(12px, 1.2vw, 16px);
   line-height: 1.5;
   color: #4A4A4A;
@@ -113,7 +113,7 @@
     justify-content: center;
     font-size: 24px;
     font-weight: bold;
-    font-family: 'Inter', sans-serif;
+
   }
   .process-s-img-mobile {
     width: 100%;
@@ -126,14 +126,14 @@
   .process-mobile-content h3 {
     margin: 0 0 8px 0;
     font-size: 20px;
-    font-family: 'Inter', sans-serif;
+
     color: #070815;
   }
   .process-mobile-content p {
     margin: 0;
     color: #4A4A4A;
     line-height: 1.5;
-    font-family: 'Inter', sans-serif;
+
   }
   .process-s-title {
     position: relative;

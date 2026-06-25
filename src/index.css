@@ -1,5 +1,24 @@
+@font-face {
+  font-family: 'Zalando Sans';
+  src: url('/fonts/Zalando_Sans/ZalandoSans-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Zalando Sans';
+  src: url('/fonts/Zalando_Sans/ZalandoSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-heading: 'Zalando Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,6 +30,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .title-font {
+  font-family: var(--font-heading);
 }
 
 html, body {
