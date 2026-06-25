@@ -1,47 +1,232 @@
 .booking-section {
+  position: relative;
   width: 100%;
   padding: 120px 20px;
-  background-color: #FFFFFF; /* High contrast clean white background section */
+  /* Warm brand-cream wash so the booking card stands out */
+  background: radial-gradient(120% 80% at 50% 0%, #FBF3EA 0%, #F4F1EA 45%, #F7F5F0 100%);
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Soft copper glow behind the card */
+.booking-section::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 820px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(228, 115, 23, 0.18) 0%, rgba(228, 115, 23, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .booking-container {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 900px;
+  max-width: 1140px;
   margin: 0 auto;
-  text-align: center;
+}
+
+/* ---- Two-column card ---- */
+.booking-card {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  background: #FFFFFF;
+  border: 1px solid rgba(7, 8, 21, 0.06);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(7, 8, 21, 0.04),
+    0 40px 80px -32px rgba(7, 8, 21, 0.30);
+}
+
+/* ---- LEFT: branded info panel ---- */
+.booking-info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 44px;
+  color: #FFFFFF;
+  background: linear-gradient(165deg, #14162B 0%, #070815 60%);
+  overflow: hidden;
+}
+
+/* copper glow in the panel corner */
+.booking-info::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(228, 115, 23, 0.35) 0%, rgba(228, 115, 23, 0) 70%);
+  pointer-events: none;
+}
+
+.booking-eyebrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #F0A35E;
+  background: rgba(228, 115, 23, 0.14);
+  border: 1px solid rgba(228, 115, 23, 0.3);
+  padding: 7px 14px;
+  border-radius: 50px;
+  margin-bottom: 22px;
+}
+
+.booking-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E47317;
+  box-shadow: 0 0 0 3px rgba(228, 115, 23, 0.3);
 }
 
 .booking-title {
+  position: relative;
   font-family: 'Inter', sans-serif;
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(30px, 3.2vw, 44px);
   font-weight: 800;
-  color: #070815; /* Brand Charcoal */
-  margin: 0 0 16px 0;
-  letter-spacing: -1.5px;
-  line-height: 1.15;
+  color: #FFFFFF;
+  margin: 0 0 18px 0;
+  letter-spacing: -1px;
+  line-height: 1.12;
 }
 
-.booking-subtitle {
+.booking-lead {
+  position: relative;
   font-family: 'Inter', sans-serif;
-  font-size: clamp(16px, 2vw, 20px);
-  color: #4A4A4A;
-  margin: 0 0 60px 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.66);
+  margin: 0 0 30px 0;
+}
+
+/* ---- Bullet points ---- */
+.booking-points {
+  position: relative;
+  list-style: none;
+  margin: 0 0 32px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.booking-check {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #E47317, #C55418);
+  box-shadow: 0 4px 10px rgba(228, 115, 23, 0.35);
+}
+
+/* ---- Meta row (duration / type) ---- */
+.booking-meta {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.booking-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: 50px;
+}
+
+.booking-meta-item svg {
+  color: #F0A35E;
+}
+
+.booking-signoff {
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 20px 0 0 0;
+}
+
+/* ---- RIGHT: Calendly scheduler ---- */
+.booking-widget {
+  background: #FFFFFF;
+  padding: 8px;
 }
 
 .calendly-inline-widget-wrapper {
+  position: relative;
   background: #FFFFFF;
-  border: 1px solid #E7E6E3;
-  border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(7, 8, 21, 0.04);
+  border-radius: 18px;
   overflow: hidden;
+  height: 100%;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 900px) {
+  .booking-card {
+    grid-template-columns: 1fr;
+  }
+  .booking-info {
+    padding: 44px 32px;
+  }
+  /* duration/type chips push to bottom only when stacked tall — keep tidy here */
+  .booking-meta {
+    margin-top: 24px;
+  }
 }
 
 @media (max-width: 768px) {
   .booking-section {
     padding: 80px 16px;
   }
-  .booking-subtitle {
-    margin-bottom: 40px;
+}
+
+@media (max-width: 480px) {
+  .booking-info {
+    padding: 36px 24px;
+  }
+  .booking-widget {
+    padding: 4px;
   }
 }

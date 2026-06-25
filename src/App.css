@@ -87,21 +87,58 @@
   display: flex;
 }
 
-.stripe {
-  flex: 1; /* evenly divide space between the 14 stripes */
+.stripe-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.stripe-auto, .stripe-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(6, 6, 6, 0.77) 95%, #FFFFFF 100%);
   mix-blend-mode: overlay;
-  /* All bars start very dark, then the animation illuminates them */
-  filter: brightness(0.2) saturate(0.5);
-  animation: barPulse 4s infinite ease-in-out;
 }
 
-@keyframes barPulse {
-  0% { filter: brightness(0.2) saturate(0.5); }
-  10% { filter: brightness(1.2) saturate(1.1); }
-  25% { filter: brightness(0.2) saturate(0.5); }
-  100% { filter: brightness(0.2) saturate(0.5); }
+.stripe-auto {
+  /* Animated via dynamically generated React keyframes */
+  filter: brightness(0.2) saturate(0.5);
+  transition: opacity 0.4s ease-out; /* Smoothly fade out when hovered */
+}
+
+.stripe-hover {
+  /* Static bright state */
+  filter: brightness(1.6) saturate(1.2);
+  opacity: 0;
+  transition: opacity 0.4s ease-out; /* Smoothly fade in when hovered */
+}
+
+/* --- Interactive Hover Wave --- */
+/* The stripe directly under the mouse */
+.stripe-container:hover .stripe-hover { opacity: 1; }
+.stripe-container:hover .stripe-auto { opacity: 0; }
+
+/* The 1 stripe immediately to the left and right */
+.stripe-container:has(+ .stripe-container:hover) .stripe-hover,
+.stripe-container:hover + .stripe-container .stripe-hover {
+  opacity: 0.6;
+}
+.stripe-container:has(+ .stripe-container:hover) .stripe-auto,
+.stripe-container:hover + .stripe-container .stripe-auto {
+  opacity: 0;
+}
+
+/* The 2nd stripe to the left and right */
+.stripe-container:has(+ .stripe-container + .stripe-container:hover) .stripe-hover,
+.stripe-container:hover + .stripe-container + .stripe-container .stripe-hover {
+  opacity: 0.25;
+}
+.stripe-container:has(+ .stripe-container + .stripe-container:hover) .stripe-auto,
+.stripe-container:hover + .stripe-container + .stripe-container .stripe-auto {
+  opacity: 0;
 }
 
 .logo-container {
@@ -339,14 +376,49 @@
   letter-spacing: 0.5px;
 }
 
-.trusted-logos {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.trusted-logos-wrapper {
   width: 100%;
-  max-width: 1100px;
-  gap: 40px;
-  flex-wrap: wrap;
+  overflow: hidden;
+  position: relative;
+  /* Smoothly fade the left and right edges so logos emerge elegantly */
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  padding: 20px 0;
+}
+
+.trusted-logos-track {
+  display: flex;
+  width: max-content;
+  gap: 80px;
+  /* Endless continuous sliding to the left. 100s because the track is 4x wider now */
+  animation: scrollMarquee 100s linear infinite;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  /* Translate exactly 50% plus half the gap width to perfectly loop */
+  100% { transform: translateX(calc(-50% - 40px)); }
+}
+
+.trusted-logo-item {
+  display: flex;
+  align-items: center;
+  /* Initial hidden state for the Scroll Reveal */
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.trusted-logos-wrapper.is-visible .trusted-logo-item {
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* Dynamic delay based on the React style index for domino effect */
+  animation-delay: calc(var(--logo-index) * 0.15s);
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .brand-placeholder {
@@ -355,7 +427,8 @@
   width: auto;
   object-fit: contain;
   color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: grayscale(100%) opacity(0.6);
 }
 
 .brand-large {
@@ -363,9 +436,16 @@
   max-width: 150px;
 }
 
-.brand-placeholder:hover {
-  color: rgba(255, 255, 255, 1);
-  transform: scale(1.05);
+/* Hover Focus Effect */
+.trusted-logos-track:hover .brand-placeholder {
+  /* Dim all logos slightly more when hovering the track */
+  filter: grayscale(100%) opacity(0.2);
+}
+
+.trusted-logos-track .trusted-logo-item:hover .brand-placeholder {
+  /* Brighten only the hovered logo */
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
@@ -452,13 +532,22 @@
   width: 100%;
   height: auto;
   border-radius: 32px;
-  transition: transform 0.3s ease;
+  border: 2px solid transparent; /* Prepare for neon border */
+  background: #FFF; /* Solid background for the glow */
+  /* Smooth, heavy trailing effect for the magnetic pull */
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s ease, border 0.3s ease;
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  will-change: transform;
 }
 
-.service-card-img:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+.service-card-wrapper:hover .service-card-img {
+  /* JS handles the movement, CSS handles the neon glow */
+  border: 2px solid rgba(238, 122, 29, 0.8);
+  box-shadow: 
+    0 15px 35px rgba(0,0,0,0.1),
+    0 0 20px rgba(238, 122, 29, 0.4),
+    0 0 40px rgba(238, 122, 29, 0.2),
+    0 0 60px rgba(238, 122, 29, 0.1);
 }
 
 @media (max-width: 1024px) {

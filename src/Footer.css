@@ -1,258 +1,312 @@
-/* ===========================
-   FOOTER – Seamless blend from white
-   =========================== */
+.footer-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+}
 
-.footer-section {
+/* Footer */
+.footer-container {
   position: relative;
   width: 100vw;
-  align-self: stretch;
-  margin-left: 0;
-  margin-bottom: -64px; /* Cancel the #root bottom padding */
-  background-color: #F0EDE4;
-  box-sizing: border-box;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  min-height: 700px;
+  height: 71vw; /* roughly 1024/1440 */
+  max-height: 1024px;
+  background: #FFFFFF;
 }
 
-/* ---- Fade overlay: white → transparent ---- */
-.footer-fade-overlay {
+/* Rectangle 145 */
+.rect-145 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: #F0EDE4;
+}
+
+/* Ellipses - kept with original sizes but centered relatively so they scale nicely */
+.ellipse-37 {
+  position: absolute;
+  width: 137vw;
+  height: 60vw;
+  left: -19vw;
+  top: -41vw;
+  background: #FFFFFF;
+  filter: blur(20vw);
+}
+
+.ellipse-39 {
+  position: absolute;
+  width: 145vw;
+  height: 59vw;
+  left: -26vw;
+  bottom: -10%;
+  background: #E47317;
+  filter: blur(15vw);
+}
+
+.ellipse-38 {
+  position: absolute;
+  width: 110vw;
+  height: 30vw;
+  left: -6vw;
+  bottom: -15%;
+  background: #C55418;
+  filter: blur(10vw);
+}
+
+.ellipse-40 {
+  position: absolute;
+  width: 110vw;
+  height: 26vw;
+  left: -6vw;
+  bottom: -15%;
+  background: #5A1A14;
+  filter: blur(10vw);
+}
+
+.footer-top-fade {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 260px;
-  z-index: 2;
-  pointer-events: none;
+  height: 50%;
+  /* Using multiple stops to create a "smoothstep" easing curve for a super soft, natural fade */
   background: linear-gradient(
-    180deg,
-    #FFFFFF 0%,
-    #FFFFFF 15%,
-    rgba(255, 255, 255, 0.85) 35%,
-    rgba(255, 255, 255, 0.5) 55%,
-    rgba(255, 255, 255, 0.15) 80%,
+    to bottom, 
+    rgba(255, 255, 255, 1) 0%, 
+    rgba(255, 255, 255, 1) 10%, 
+    rgba(255, 255, 255, 0.9) 25%, 
+    rgba(255, 255, 255, 0.7) 45%, 
+    rgba(255, 255, 255, 0.4) 70%, 
     rgba(255, 255, 255, 0) 100%
   );
+  z-index: 20;
 }
 
-/* ---- Background SVG ---- */
-.footer-bg-wrapper {
+/* Group 106 */
+.group-106 {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  left: 0;
+  top: 0;
+  display: flex;
+}
+
+@keyframes pleatWave {
+  0%, 100% {
+    box-shadow: inset -15px 0px 20px -15px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: inset -40px 0px 40px -15px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.pleat {
+  flex: 1; /* This will automatically make all 14 pleats perfectly equal width */
+  height: 100%;
+  background: transparent;
+  /* A sharp, 1px thin bright line to create that perfect folded metal edge */
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  /* A super clean inset shadow on the right edge for 3D depth, completely avoiding muddy gradients */
+  box-shadow: inset -25px 0px 30px -15px rgba(0, 0, 0, 0.25);
+  animation: pleatWave 4s ease-in-out infinite;
+}
+
+/* --- Marquee Animation --- */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Translate exactly half the width of the content (which is exactly one image) to create a perfect infinite loop */
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 30;
   pointer-events: none;
 }
 
-.footer-bg-svg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+.marquee-content {
+  display: flex;
+  width: max-content;
+  /* Adjust the 15s down if you want it faster, up if you want it slower */
+  animation: marqueeScroll 15s linear infinite;
 }
 
-/* ---- Content layer ---- */
+.footer-large-text {
+  /* Forces each image to be exactly the width of the 1440px container */
+  width: 1440px; 
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* --- Footer Top Content --- */
 .footer-content {
-  position: relative;
-  z-index: 3;
+  position: absolute;
+  top: 100px;
+  left: 0;
   width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
-  padding: 200px 40px 50px 40px; /* Extra top padding to sit below the fade zone */
+  z-index: 40;
+  color: #000;
+  font-family: 'Montserrat', sans-serif; /* Upgraded premium font */
 }
 
-/* ---- Brand logo ---- */
-.footer-brand-section {
+.footer-brand {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  gap: 30px;
+  margin-bottom: 50px;
 }
 
-.footer-logo {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  opacity: 0.9;
+.footer-main-logo {
+  max-width: 600px; /* Limits size on ultra-wide screens */
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
 }
 
-/* ---- Tagline ---- */
-.footer-tagline {
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: rgba(26, 26, 26, 0.7);
-  margin: 0 0 32px 0;
-  text-align: center;
-  max-width: 420px;
-  letter-spacing: 0.2px;
-}
-
-/* ---- CTA Button ---- */
-.footer-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #1A1A1A;
-  color: #FFFFFF;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
+.footer-services {
+  display: flex;
+  gap: 40px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 14px 32px;
-  border-radius: 50px;
-  text-decoration: none;
-  cursor: pointer;
-  margin-bottom: 60px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  letter-spacing: 2.5px; /* Wide tracking for a premium agency feel */
+  color: #333;
+  text-transform: uppercase;
 }
 
-.footer-cta-btn:hover {
-  background: #333333;
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-.footer-cta-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.footer-cta-btn:hover svg {
-  transform: translateX(4px);
-}
-
-/* ---- Divider ---- */
-.footer-divider-line {
-  width: 100%;
+.footer-divider {
+  width: 80%;
   height: 1px;
-  background: rgba(26, 26, 26, 0.12);
-  margin-bottom: 28px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 }
 
-/* ---- Bottom row ---- */
-.footer-bottom-row {
+.footer-links {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-links a {
+  position: relative;
+  text-decoration: none;
+  color: #111;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+}
+
+/* Crazy good underline sweep animation for links */
+.footer-links a::after {
+  content: '';
+  position: absolute;
   width: 100%;
+  height: 2px;
+  bottom: -6px;
+  left: 0;
+  background-color: #E47317; /* Copper accent */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-.footer-copyright-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(26, 26, 26, 0.45);
-  margin: 0;
-  letter-spacing: 0.2px;
+.footer-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-/* ---- Social icons ---- */
-.footer-social-row {
+.footer-links a:hover {
+  transform: translateY(-2px);
+  color: #E47317;
+}
+
+.footer-socials {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 20px;
+  margin-bottom: 60px;
 }
 
-.social-icon-link {
+/* Crazy good morphed hover animation for social icons */
+.social-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: rgba(26, 26, 26, 0.5);
-  text-decoration: none;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 50px;
+  height: 50px;
+  background-color: #1A1A1A;
+  color: #fff;
+  border-radius: 12px;
   cursor: pointer;
+  text-decoration: none;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
 }
 
-.social-icon-link:hover {
-  color: #1A1A1A;
-  background: rgba(26, 26, 26, 0.08);
-  transform: translateY(-3px);
+.social-icon svg {
+  transition: transform 0.5s ease;
 }
 
-.social-icon-link svg {
-  transition: transform 0.3s ease;
+.social-icon:hover {
+  transform: translateY(-8px) scale(1.1) rotate(8deg);
+  background-color: #E47317; /* Morph to brand color */
+  border-radius: 25px; /* Morph shape to perfect circle */
+  box-shadow: 0 15px 25px rgba(228, 115, 23, 0.4);
 }
 
-.social-icon-link:hover svg {
-  transform: scale(1.1);
+.social-icon:hover svg {
+  transform: scale(1.2);
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.legal-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.legal-links a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s;
+}
+
+.legal-links a:hover {
+  color: #E47317;
+}
+
+.separator {
+  opacity: 0.5;
+}
+
+.footer-legal p {
+  margin: 0;
 }
 
 
-/* ===========================
-   RESPONSIVE
-   =========================== */
 
-@media (min-width: 901px) {
-  .footer-section {
-    min-height: 750px;
-  }
 
-  .footer-bg-svg {
-    object-fit: fill;
-  }
-}
-
-@media (max-width: 900px) {
-  .footer-content {
-    padding: 180px 24px 40px 24px;
-  }
-
-  .footer-fade-overlay {
-    height: 200px;
-  }
-}
-
-@media (max-width: 600px) {
-  .footer-section {
-    min-height: 550px;
-  }
-
-  .footer-content {
-    padding: 160px 20px 32px 20px;
-  }
-
-  .footer-fade-overlay {
-    height: 160px;
-  }
-
-  .footer-logo {
-    height: 32px;
-  }
-
-  .footer-tagline {
-    font-size: 15px;
-  }
-
-  .footer-cta-btn {
-    font-size: 14px;
-    padding: 12px 28px;
-    margin-bottom: 40px;
-  }
-
-  .footer-bottom-row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .footer-copyright-text {
-    order: 2;
-  }
-
-  .footer-social-row {
-    order: 1;
-  }
-}

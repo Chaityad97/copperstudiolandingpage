@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import './App.css';
 import ProcessRoadmap from './ProcessRoadmap';
 import Pricing from './Pricing';
@@ -6,6 +6,7 @@ import WallOfLove from './WallOfLove';
 import FAQ from './FAQ';
 import Booking from './Booking';
 import Footer from './Footer';
+
 import logoImg from './assets/logo.svg';
 import brand1 from './assets/logos/Group 79.svg';
 import brand2 from './assets/logos/Group 80.svg';
@@ -27,6 +28,97 @@ function App() {
   // 14 stripes based on the Figma spec (Rectangle 89 through 102)
   const stripes = Array.from({ length: 14 });
   console.log("Logo path loaded as:", logoImg);
+
+  // Generate the complex 3-stage wave animation for the hero stripes
+  const stripeAnimationCSS = useMemo(() => {
+    const TOTAL_TIME = 9; // seconds loop
+    const FPS = 15;
+    const frames = TOTAL_TIME * FPS;
+    let css = '';
+    
+    for (let i = 0; i < 14; i++) {
+      const d = Math.min(i, 13 - i);
+      // Define the peak hit times for this specific stripe
+      const peaks = [
+        0.5 + i * 0.15,               // Phase 1: Left to right
+        3.5 + (13 - i) * 0.15,        // Phase 2: Right to left
+        6.5 + d * 0.15                // Phase 3a: Outside to inside
+      ];
+      if (d < 6) {
+        peaks.push(7.4 + (6 - d) * 0.15); // Phase 3b: Repel back
+      }
+
+      let keyframes = `@keyframes complexPulse${i} {\n`;
+      
+      // Calculate brightness smoothly over time for a perfect collision blend
+      for (let frame = 0; frame <= frames; frame++) {
+        const t = frame / FPS;
+        let maxBright = 0.2;
+        
+        peaks.forEach(peak => {
+          let bright = 0.2;
+          if (t >= peak - 0.2 && t <= peak) {
+            const progress = (t - (peak - 0.2)) / 0.2;
+            bright = 0.2 + progress * 1.0;
+          } else if (t > peak && t <= peak + 0.6) {
+            const progress = (t - peak) / 0.6;
+            bright = 1.2 - progress * 1.0;
+          }
+          if (bright > maxBright) maxBright = bright;
+        });
+        
+        const percent = ((t / TOTAL_TIME) * 100).toFixed(1);
+        const progress = (maxBright - 0.2) / 1.0;
+        const saturate = (0.5 + progress * 0.6).toFixed(2);
+        
+        keyframes += `  ${percent}% { filter: brightness(${maxBright.toFixed(2)}) saturate(${saturate}); }\n`;
+      }
+      keyframes += `}\n`;
+      css += keyframes;
+    }
+    return css;
+  }, []);
+
+  // Intersection Observer for Trusted Brands Reveal
+  const [isTrustedVisible, setIsTrustedVisible] = useState(false);
+  const trustedRef = useRef(null);
+
+  // Intersection Observer for Services Reveal
+  const [isServicesVisible, setIsServicesVisible] = useState(false);
+  const servicesRef = useRef(null);
+
+  useEffect(() => {
+    // Trusted Brands Observer
+    const trustedObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsTrustedVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (trustedRef.current) {
+      trustedObserver.observe(trustedRef.current);
+    }
+
+    // Services Observer
+    const servicesObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsServicesVisible(true);
+        }
+      },
+      { threshold: 0.1 } // Lower threshold so it triggers as soon as the grid starts coming up
+    );
+    if (servicesRef.current) {
+      servicesObserver.observe(servicesRef.current);
+    }
+
+    return () => {
+      trustedObserver.disconnect();
+      servicesObserver.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -73,13 +165,16 @@ function App() {
 
 
       {/* Stripes overlay (Group 12 -> Group 105) */}
+      <style>{stripeAnimationCSS}</style>
       <div className="stripes-wrapper">
         {stripes.map((_, index) => (
-          <div 
-            key={index} 
-            className="stripe"
-            style={{ animationDelay: `${index * 0.15}s` }}
-          ></div>
+          <div key={index} className="stripe-container">
+            <div 
+              className="stripe-auto"
+              style={{ animation: `complexPulse${index} 9s infinite linear` }}
+            ></div>
+            <div className="stripe-hover"></div>
+          </div>
         ))}
       </div>
       
@@ -111,20 +206,39 @@ function App() {
     </div>
 
       {/* Trusted Brands Section */}
-      <section className="trusted-section">
+      <section className="trusted-section" ref={trustedRef}>
         <h3 className="trusted-title">Trusted by Brands Across India</h3>
-        <div className="trusted-logos">
-          <img src={brand1} alt="Trusted Brand 1" className="brand-placeholder" />
-          <img src={brand2} alt="Trusted Brand 2" className="brand-placeholder" />
-          <img src={brand3} alt="Trusted Brand 3" className="brand-placeholder" />
-          <img src={brand4} alt="Trusted Brand 4" className="brand-placeholder brand-large" />
-          <img src={brand5} alt="Trusted Brand 5" className="brand-placeholder brand-large" />
-          <img src={brand7} alt="DataCircles Logo" className="brand-placeholder brand-large" />
+        <div className={`trusted-logos-wrapper ${isTrustedVisible ? 'is-visible' : ''}`}>
+          <div className="trusted-logos-track">
+            {/* Render 8 sets of logos to ensure the track is wide enough for 5K monitors without looping gaps */}
+            {Array.from({ length: 8 }).map((_, setIndex) => (
+              <React.Fragment key={setIndex}>
+                <div className="trusted-logo-item" style={{ '--logo-index': 1 }}>
+                  <img src={brand1} alt="Trusted Brand 1" className="brand-placeholder" />
+                </div>
+                <div className="trusted-logo-item" style={{ '--logo-index': 2 }}>
+                  <img src={brand2} alt="Trusted Brand 2" className="brand-placeholder" />
+                </div>
+                <div className="trusted-logo-item" style={{ '--logo-index': 3 }}>
+                  <img src={brand3} alt="Trusted Brand 3" className="brand-placeholder" />
+                </div>
+                <div className="trusted-logo-item" style={{ '--logo-index': 4 }}>
+                  <img src={brand4} alt="Trusted Brand 4" className="brand-placeholder brand-large" />
+                </div>
+                <div className="trusted-logo-item" style={{ '--logo-index': 5 }}>
+                  <img src={brand5} alt="Trusted Brand 5" className="brand-placeholder brand-large" />
+                </div>
+                <div className="trusted-logo-item" style={{ '--logo-index': 6 }}>
+                  <img src={brand7} alt="DataCircles Logo" className="brand-placeholder brand-large" />
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="services-section">
+      <section className="services-section" ref={servicesRef}>
         <h2 className="services-title">What Services do we provide?</h2>
         
         <div className="services-toggle">
@@ -132,9 +246,31 @@ function App() {
           <button className="toggle-btn">CopperWeb!</button>
         </div>
 
-        <div className="services-grid">
+        <div className={`services-grid ${isServicesVisible ? 'is-visible' : ''}`}>
           {servicesList.map((svgSrc, index) => (
-            <div key={index} className="service-card-wrapper">
+            <div 
+              key={index} 
+              className="service-card-wrapper" 
+              style={{ '--card-index': index + 1 }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                // Calculate cursor position relative to the center of the card
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const img = e.currentTarget.querySelector('.service-card-img');
+                if (img) {
+                  // Pull the image 15% towards the cursor and scale up slightly
+                  img.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
+                }
+              }}
+              onMouseLeave={(e) => {
+                const img = e.currentTarget.querySelector('.service-card-img');
+                if (img) {
+                  // Reset back to normal smoothly
+                  img.style.transform = `translate(0px, 0px) scale(1)`;
+                }
+              }}
+            >
               <img src={svgSrc} alt={`Service ${index + 1}`} className="service-card-img" />
             </div>
           ))}
@@ -156,7 +292,6 @@ function App() {
       {/* Booking Section */}
       <Booking />
 
-      {/* Footer Section */}
       <Footer />
     </>
   );
