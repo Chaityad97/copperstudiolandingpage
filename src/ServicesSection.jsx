@@ -78,9 +78,9 @@ export default function ServicesSection() {
                   }
                 }}
               >
-                <img src={brandBrochureImg} alt="Brand Brochure" className="s-card-img" />
+                <img src={premiumGroupImg} alt="Cottson Clothing" className="s-card-img" />
                 <video 
-                  src={brandBrochureVid} 
+                  src={premiumGroupVid} 
                   className="s-card-vid" 
                   muted 
                   loop 
@@ -153,9 +153,9 @@ export default function ServicesSection() {
                   }
                 }}
               >
-                <img src={premiumGroupImg} alt="Premium Micro Animation" className="s-card-img" />
+                <img src={brandBrochureImg} alt="ELEVE 45" className="s-card-img" />
                 <video 
-                  src={premiumGroupVid} 
+                  src={brandBrochureVid} 
                   className="s-card-vid" 
                   muted 
                   loop 

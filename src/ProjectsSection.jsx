@@ -1,13 +1,28 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ProjectsSection.css';
 import projectImg from './assets/brand-identity-brochure.png';
 import commonGroundsImg from './assets/common-grounds.jpg';
 import teaBoxesImg from './assets/Tea - Boxes 1.png';
 import premiumGroupImg from './assets/image.png';
 
+import proj1Svg from './assets/projects/Cottson Clothing.svg';
+import proj2Svg from './assets/projects/common ground.svg';
+import proj3Svg from './assets/projects/darjeeling garden.svg';
+import proj4Svg from './assets/projects/ELEVE45.svg';
+
 export default function ProjectsSection() {
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null);
+  const [activeSvg, setActiveSvg] = useState(null);
+
+  useEffect(() => {
+    if (activeSvg) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [activeSvg]);
 
   useEffect(() => {
     let ticking = false;
@@ -92,10 +107,10 @@ export default function ProjectsSection() {
   }, []);
 
   const projects = [
-    { title: "Copper Brand", tags: ["UI/UX", "Branding", "Development"], img: projectImg },
-    { title: "Common Grounds", tags: ["Web Design"], img: commonGroundsImg },
-    { title: "Tea Selection", tags: ["Design", "Packaging", "Print"], img: teaBoxesImg },
-    { title: "Project Four", tags: ["Development", "Creative"], img: premiumGroupImg }
+    { title: "Cottson Clothing", tags: ["UI/UX", "Branding", "Development"], img: premiumGroupImg, svgUrl: proj1Svg },
+    { title: "Common Grounds", tags: ["Web Design"], img: commonGroundsImg, svgUrl: proj2Svg },
+    { title: "Darjeeling Garden", tags: ["Design", "Packaging", "Print"], img: teaBoxesImg, svgUrl: proj3Svg },
+    { title: "ELEVE45", tags: ["Development", "Creative"], img: projectImg, svgUrl: proj4Svg }
   ];
 
   return (
@@ -110,7 +125,12 @@ export default function ProjectsSection() {
         <div className="projects-glass-wrapper" ref={wrapperRef}>
           <div className="projects-grid">
             {projects.map((proj, idx) => (
-              <div className="project-card" key={idx}>
+              <div 
+                className="project-card" 
+                key={idx}
+                onClick={() => setActiveSvg(proj.svgUrl)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="project-card-image-wrapper">
                   <img src={proj.img} alt={proj.title} className="project-card-image" />
                 </div>
@@ -132,6 +152,21 @@ export default function ProjectsSection() {
         </div>
 
       </div>
+
+      {/* SVG Modal Overlay */}
+      {activeSvg && (
+        <div className="project-svg-modal-overlay" onClick={() => setActiveSvg(null)}>
+          <div className="project-svg-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="project-svg-modal-close" onClick={() => setActiveSvg(null)}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <img src={activeSvg} alt="Project Presentation" className="project-svg-full" />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
