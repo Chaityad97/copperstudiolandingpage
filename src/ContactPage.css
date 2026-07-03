@@ -3,9 +3,12 @@
 }
 
 /* ── Hero ── */
+/* Small top padding so the hero card rises up behind the fixed navbar,
+   letting the navbar float over the top edge of the gradient (intertwined
+   look) instead of sitting in a gap below it. */
 .contact-hero-wrap {
   width: 100%;
-  padding: 90px 18px 0;
+  padding: 12px 18px 0;
   box-sizing: border-box;
 }
 
@@ -75,13 +78,19 @@
 
 @media (max-width: 768px) {
   .contact-hero-wrap {
-    padding: 80px 12px 0;
+    padding: 10px 12px 0;
   }
 
   .contact-hero-card {
     height: auto;
     min-height: 280px;
     border-radius: 16px;
+  }
+
+  /* Nudge the hero content down so it clears the floating navbar which now
+     overlaps the top of the card. */
+  .contact-hero-content {
+    padding-top: 70px;
   }
 }
 
