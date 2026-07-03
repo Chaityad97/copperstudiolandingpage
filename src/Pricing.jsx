@@ -9,7 +9,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-const Pricing = ({ activeService, onServiceChange }) => {
+const Pricing = ({ activeService, onServiceChange, showToggle = true }) => {
   // Controlled when props are passed (services page), otherwise self-managed (home page).
   const [internalKey, setInternalKey] = useState('brand');
   const activeKey = activeService ?? internalKey;
@@ -29,21 +29,23 @@ const Pricing = ({ activeService, onServiceChange }) => {
           </p>
         </div>
 
-        {/* Service toggle */}
-        <div className="pricing-toggle-wrap">
-          <div className="pricing-toggle">
-            {pricingServices.map((s) => (
-              <button
-                key={s.key}
-                className={`pricing-toggle-btn ${activeKey === s.key ? 'active' : ''}`}
-                onClick={() => setActiveKey(s.key)}
-              >
-                <span className="toggle-label-full">{s.label}</span>
-                <span className="toggle-label-short">{s.shortLabel}</span>
-              </button>
-            ))}
+        {/* Service toggle — hidden on individual service pages (locked to one service) */}
+        {showToggle && (
+          <div className="pricing-toggle-wrap">
+            <div className="pricing-toggle">
+              {pricingServices.map((s) => (
+                <button
+                  key={s.key}
+                  className={`pricing-toggle-btn ${activeKey === s.key ? 'active' : ''}`}
+                  onClick={() => setActiveKey(s.key)}
+                >
+                  <span className="toggle-label-full">{s.label}</span>
+                  <span className="toggle-label-short">{s.shortLabel}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="pricing-grid">
           {plans.map((plan, index) => (

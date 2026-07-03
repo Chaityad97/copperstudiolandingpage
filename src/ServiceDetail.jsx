@@ -1,6 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
+import Pricing from './Pricing';
+import ComparisonStrip from './ComparisonStrip';
+import ProcessRoadmap from './ProcessRoadmap';
+import WallOfLove from './WallOfLove';
 import FAQ from './FAQ';
 import Booking from './Booking';
 import Footer from './Footer';
@@ -44,15 +48,19 @@ function ServiceDetail() {
           </div>
         </div>
 
-        {/* Placeholder body — content to be added later */}
-        <div className="svc-detail-body">
-          <div className="svc-detail-placeholder">
-            <span>{service.name}{service.suffix} — CONTENT COMING SOON</span>
-          </div>
-          <Link to="/services" className="svc-detail-back">← Back to all services</Link>
-        </div>
+        {/* Pricing — locked to this service only (no toggle) */}
+        <Pricing activeService={service.pricingKey} showToggle={false} />
 
-        {/* End section — same as contact */}
+        {/* Comparison strip — this service's plans only */}
+        <ComparisonStrip activeService={service.pricingKey} />
+
+        {/* Process — reused */}
+        <ProcessRoadmap />
+
+        {/* Bento boxes / testimonials — reused */}
+        <WallOfLove />
+
+        {/* End section — same as contact/services */}
         <FAQ />
         <Booking />
         <Footer />

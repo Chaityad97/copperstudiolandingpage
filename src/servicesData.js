@@ -4,6 +4,7 @@
 export const services = [
   {
     slug: 'brand-identity',
+    pricingKey: 'brand',
     number: '01',
     category: 'Brand Identity',
     name: 'Copper',
@@ -13,6 +14,7 @@ export const services = [
   },
   {
     slug: 'web-design',
+    pricingKey: 'web',
     number: '02',
     category: 'Web Design & Development',
     name: 'Copper',
@@ -22,6 +24,7 @@ export const services = [
   },
   {
     slug: 'client-portal',
+    pricingKey: 'flow',
     number: '03',
     category: 'Client Portal',
     name: 'Copper',
