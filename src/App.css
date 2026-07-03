@@ -690,6 +690,11 @@ img, video {
   color: #E06D20;
 }
 
+.mobile-nav-links a.active {
+  color: #E06D20;
+  font-weight: 700;
+}
+
 .mobile-lets-talk {
   margin-top: 24px;
   font-size: 16px;
@@ -730,7 +735,15 @@ img, video {
     padding: 8px 14px;
     font-size: 12px;
   }
-  
+
+  /* Higher specificity so the mobile menu's Let's Talk button keeps its
+     intended larger size instead of being shrunk by the rule above,
+     which was making it look mismatched next to the Client Portal pill. */
+  .mobile-nav-links .lets-talk-btn.mobile-lets-talk {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+
   .bottom-bar {
     padding-bottom: 20px;
     justify-content: center;

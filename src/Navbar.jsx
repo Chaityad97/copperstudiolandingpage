@@ -21,11 +21,11 @@ function Navbar({ activeSection, setActiveSection }) {
       {/* Mobile Menu Overlay */}
       <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-nav-links">
-          <a href="/#home" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('home'); }}>Home</a>
-          <a href="/#about" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('about'); }}>Studio</a>
-          <Link to="/services" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('services'); }}>Services</Link>
-          <a href="/#projects" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('projects'); }}>Projects</a>
-          <Link to="/contact" onClick={toggleMobileMenu}>Contact</Link>
+          <a href="/#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('home'); }}>Home</a>
+          <a href="/#about" className={activeSection === 'about' ? 'active' : ''} onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('about'); }}>Studio</a>
+          <Link to="/services" className={activeSection === 'services' ? 'active' : ''} onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('services'); }}>Services</Link>
+          <a href="/#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('projects'); }}>Projects</a>
+          <Link to="/contact" className={activeSection === 'contact' ? 'active' : ''} onClick={toggleMobileMenu}>Contact</Link>
           <a href="/#portal" className="client-portal-btn mobile-client-portal" onClick={toggleMobileMenu}>Client Portal</a>
           <button className="lets-talk-btn mobile-lets-talk">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
