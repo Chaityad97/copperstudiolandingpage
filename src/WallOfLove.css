@@ -273,3 +273,56 @@
     flex: 1 1 100% !important;
   }
 }
+
+/* Phone-only: the testimonial cards are revealed by a JS scroll-pin
+   animation tuned for desktop viewport math (pinned section height,
+   translateY/opacity driven by scroll position). On mobile that math
+   doesn't resolve the same way and the cards were staying invisible
+   forever. Bypass the animation on phones — force everything to its
+   final, fully-visible resting state and let the section flow normally
+   instead of being pinned. Desktop/tablet keep the animation intact. */
+@media (max-width: 768px) {
+  .wall-section {
+    height: auto !important;
+  }
+
+  .wall-sticky-container {
+    display: block !important;
+    position: relative;
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .wall-header-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 32px;
+  }
+
+  .wall-glass-wrapper {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .wall-container {
+    width: 100%;
+  }
+
+  /* Same double-padding issue as Pricing: outer .global-section already
+     insets 16px, so this inner 40px padding was needlessly narrowing the
+     cards further. */
+  .wall-section .global-container {
+    padding: 0;
+  }
+
+  .bento-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

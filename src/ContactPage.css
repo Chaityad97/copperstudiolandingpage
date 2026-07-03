@@ -216,6 +216,45 @@
   }
 }
 
+/* Phone-only: shrink the Chat to sales/support/Visit us/Call us cards
+   so they read as a compact list instead of large blocks. */
+@media (max-width: 480px) {
+  .contact-cards-grid {
+    gap: 12px;
+  }
+
+  .contact-card {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .contact-card-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  .contact-card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-card-title {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
+  .contact-card-desc {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .contact-card-link {
+    font-size: 0.85rem;
+  }
+}
+
 /* ── Get in Touch ── */
 .git-section {
   background: #ffffff;

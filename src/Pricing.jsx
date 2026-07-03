@@ -38,7 +38,8 @@ const Pricing = ({ activeService, onServiceChange }) => {
                 className={`pricing-toggle-btn ${activeKey === s.key ? 'active' : ''}`}
                 onClick={() => setActiveKey(s.key)}
               >
-                {s.label}
+                <span className="toggle-label-full">{s.label}</span>
+                <span className="toggle-label-short">{s.shortLabel}</span>
               </button>
             ))}
           </div>
