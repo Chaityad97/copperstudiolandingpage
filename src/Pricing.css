@@ -41,6 +41,57 @@
   line-height: 1.6;
 }
 
+/* ── Service toggle ── */
+.pricing-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 48px 0;
+}
+
+.pricing-toggle {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  background: #F0EDE4;
+  border-radius: 999px;
+  border: 1px solid #E7E0D4;
+}
+
+.pricing-toggle-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #504F4F;
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 26px;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  white-space: nowrap;
+}
+
+.pricing-toggle-btn:hover {
+  color: #070815;
+}
+
+.pricing-toggle-btn.active {
+  background: #070815;
+  color: #FFFFFF;
+}
+
+@media (max-width: 600px) {
+  .pricing-toggle {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 24px;
+  }
+  .pricing-toggle-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+}
+
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

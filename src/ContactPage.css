@@ -66,6 +66,13 @@
   margin: 0;
 }
 
+/* Wrap the title before it can overflow the card on tablets */
+@media (max-width: 1024px) {
+  .contact-hero-title {
+    white-space: normal;
+  }
+}
+
 @media (max-width: 768px) {
   .contact-hero-wrap {
     padding: 80px 12px 0;
@@ -75,10 +82,6 @@
     height: auto;
     min-height: 280px;
     border-radius: 16px;
-  }
-
-  .contact-hero-title {
-    white-space: normal;
   }
 }
 
@@ -418,12 +421,23 @@
   max-width: 1280px;
   margin: 0 auto;
   height: 420px;
+  max-height: 60vh;
   border: 2px solid #d0d5dd;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .contact-img-section {
+    padding: 40px 16px;
+  }
+  .contact-img-box {
+    height: 260px;
+    border-radius: 10px;
+  }
 }
 
 .contact-img-label {

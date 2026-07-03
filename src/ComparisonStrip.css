@@ -1,0 +1,233 @@
+.comparison-section {
+  background: #ffffff;
+  padding: 100px 24px;
+}
+
+.comparison-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.comparison-head {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.comparison-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #070815;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.comparison-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  color: #504F4F;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── Strip: an always-visible bar with a click-to-open arrow ── */
+.comparison-strip {
+  border: 1px solid #EAE3D9;
+  border-radius: 16px;
+  background: #FBF9F3;
+  overflow: hidden;
+  transition: box-shadow 0.35s ease;
+}
+
+.comparison-strip.open {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07);
+}
+
+.comparison-strip-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  text-align: left;
+}
+
+.cmp-strip-label {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: #504F4F;
+}
+
+.cmp-strip-label strong {
+  font-weight: 700;
+  color: #070815;
+}
+
+.cmp-strip-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.cmp-strip-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.cmp-pill {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #EAE3D9;
+  color: #504F4F;
+}
+
+.cmp-pill-popular {
+  background: #EE7A1D;
+  border-color: #EE7A1D;
+  color: #ffffff;
+}
+
+/* Arrow button */
+.cmp-strip-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #070815;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+}
+
+.comparison-strip-bar:hover .cmp-strip-arrow {
+  background: #EE7A1D;
+}
+
+.cmp-strip-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* In-flow table — grows the strip's height, pushing content below down */
+.comparison-table {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  border-top: 1px solid transparent;
+}
+
+.comparison-table.open {
+  max-height: 1200px;
+  opacity: 1;
+  border-top-color: #EAE3D9;
+}
+
+.cmp-row {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid #EAE3D9;
+}
+
+.cmp-row:last-child {
+  border-bottom: none;
+}
+
+.cmp-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  min-height: 40px;
+}
+
+.cmp-cell-feature {
+  justify-content: flex-start;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #070815;
+  text-align: left;
+}
+
+/* Header row */
+.cmp-row-head .cmp-cell {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #070815;
+  background: #FBF9F3;
+  min-height: 44px;
+  padding: 13px 14px;
+}
+
+.cmp-col-head {
+  color: #504F4F;
+}
+
+/* Highlighted Advance column (Most Popular) */
+.cmp-col-copper {
+  background: rgba(238, 122, 29, 0.06);
+}
+
+.cmp-col-copper-head {
+  background: #EE7A1D !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 700px) {
+  .comparison-section {
+    padding: 64px 14px;
+  }
+
+  .comparison-strip-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 18px;
+  }
+
+  .cmp-strip-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cmp-row {
+    grid-template-columns: 1.4fr 0.9fr 0.9fr 0.9fr;
+  }
+
+  .cmp-cell {
+    padding: 8px 6px;
+    min-height: 36px;
+  }
+
+  .cmp-cell-feature {
+    font-size: 0.76rem;
+  }
+
+  .cmp-row-head .cmp-cell {
+    font-size: 0.74rem;
+  }
+
+  .cmp-check,
+  .cmp-cross {
+    width: 16px;
+    height: 16px;
+  }
+
+  .comparison-table.open {
+    max-height: 1600px;
+  }
+}

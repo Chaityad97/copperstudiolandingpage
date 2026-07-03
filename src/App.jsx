@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import CoordinateSection from './CoordinateSection';
 import ProjectsSection from './ProjectsSection';
@@ -11,6 +11,17 @@ import Footer from './Footer';
 import ServicesSection from './ServicesSection';
 import Navbar from './Navbar';
 import ContactPage from './ContactPage';
+import ServicesPage from './ServicesPage';
+import ServiceDetail from './ServiceDetail';
+
+// Scroll to top whenever the route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 import logoImg from './assets/logo.svg';
 import brand1 from './assets/logos/Group 79.svg';
@@ -272,10 +283,15 @@ function App() {
   );
 
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/contact" element={<ContactPage />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+      </Routes>
+    </>
   );
 }
 

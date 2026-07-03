@@ -24,15 +24,13 @@ const Booking = () => {
           container.innerHTML = '';
         }
         window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/thecopperstudio/30min?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=ffffff&text_color=070815&primary_color=ee7a1d',
+          url: 'https://calendly.com/thecopperstudio/30min?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&primary_color=ee7a1d',
           parentElement: container,
           prefill: {},
           pageSettings: {
             hideEventTypeDetails: true,
             hideLandingPageDetails: true,
-            backgroundColor: 'ffffff',
-            primaryColor: 'ee7a1d',
-            textColor: '070815'
+            primaryColor: 'ee7a1d'
           }
         });
       }

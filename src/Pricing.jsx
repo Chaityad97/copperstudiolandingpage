@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Pricing.css';
+import { pricingServices } from './pricingData';
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="pricing-check-icon">
@@ -8,79 +9,15 @@ const CheckIcon = () => (
   </svg>
 );
 
-const plans = [
-  {
-    name: "Essential",
-    desc: "Build a clear, professional brand identity ready for launch.",
-    features: [
-      { text: "Brand Voice & Tone Guidelines" },
-      { text: "Target Audience Definition" },
-      { text: "Competitor Analysis" },
-      {
-        text: "Logo System",
-        subItems: ["Primary & Secondary Logo", "Brand Icon", "Favicon", "Color Variations"]
-      },
-      {
-        text: "Typography System",
-        subItems: ["Primary Font Family", "Type Hierarchy"]
-      },
-      {
-        text: "Color System",
-        subItems: ["Primary & Secondary Color Palette", "Brand Gradients"]
-      },
-      {
-        text: "Visual Assets",
-        subItems: ["Brand Illustrations", "Pattern / Texture Library"]
-      }
-    ],
-    cta: "Get Started"
-  },
-  {
-    name: "Advance",
-    desc: "Strengthen your brand with business, communication, and digital assets.",
-    features: [
-      { text: "Essential Kit" },
-      {
-        text: "Business Stationery",
-        subItems: ["Visiting Card", "Letterhead", "Envelope Design", "Invoice/Quotation Design", "Stamp/Seal Design"]
-      },
-      { text: "ID Card/Employee Badge" },
-      {
-        text: "Digital Communication Assets",
-        subItems: ["Email Signature & Newsletter Template", "PowerPoint/Presentation Template"]
-      },
-      {
-        text: "Social Media Assets",
-        subItems: ["Social Media Profile", "Post & Reel Template"]
-      },
-      { text: "Zoom/Google Meet Virtual Background" }
-    ],
-    cta: "Get Started"
-  },
-  {
-    name: "Ultimate",
-    desc: "Scale your brand with marketing, packaging and promotional solutions.",
-    features: [
-      { text: "Essential Kit" },
-      { text: "Advance Kit" },
-      {
-        text: "Corporate Print",
-        subItems: ["Brochure/Catalogue Design", "Flyer/Leaflet Design", "Poster Design", "Banner & Standee Design", "Promotional Voucher/Coupon Design"]
-      },
-      {
-        text: "Packaging & Product Assets",
-        subItems: ["Product Packaging Design", "Product Label Design", "Hand Tag Design", "Product Mockups"]
-      },
-      {
-        text: "Environmental Branding",
-        subItems: ["Signage & Wayfinding Design", "Exhibition/Trade Show Booth Design", "Merchandise Design", "Uniform/Apparel Design"]
-      }
-    ],
-    cta: "Get Started"
-  }
-];
+const Pricing = ({ activeService, onServiceChange }) => {
+  // Controlled when props are passed (services page), otherwise self-managed (home page).
+  const [internalKey, setInternalKey] = useState('brand');
+  const activeKey = activeService ?? internalKey;
+  const setActiveKey = onServiceChange ?? setInternalKey;
 
-const Pricing = () => {
+  const service = pricingServices.find((s) => s.key === activeKey) ?? pricingServices[0];
+  const plans = service.plans;
+
   return (
     <section className="pricing-section global-section" id="pricing">
       <div className="pricing-main-container global-container">
@@ -90,6 +27,21 @@ const Pricing = () => {
           <p className="pricing-subtitle">
             Whether you're just getting started, refreshing your identity, or building a complete brand experience, we've put together flexible packages designed around where your business is today and where you want it to go.
           </p>
+        </div>
+
+        {/* Service toggle */}
+        <div className="pricing-toggle-wrap">
+          <div className="pricing-toggle">
+            {pricingServices.map((s) => (
+              <button
+                key={s.key}
+                className={`pricing-toggle-btn ${activeKey === s.key ? 'active' : ''}`}
+                onClick={() => setActiveKey(s.key)}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="pricing-grid">

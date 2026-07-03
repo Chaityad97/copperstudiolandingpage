@@ -136,6 +136,7 @@
     flex-direction: column;
     height: auto;
     border-radius: 25px;
+    overflow: visible;
   }
   .booking-info {
     width: 100%;
@@ -148,8 +149,12 @@
   .booking-meta {
     margin-top: 40px;
   }
+  .booking-widget {
+    height: 700px;
+  }
   .calendly-inline-widget-wrapper {
-    min-height: 500px;
+    min-height: 700px;
+    height: 100%;
   }
 }
 
@@ -159,5 +164,9 @@
   }
   .booking-widget {
     padding: 16px;
+    height: 640px;
+  }
+  .calendly-inline-widget-wrapper {
+    min-height: 640px;
   }
 }

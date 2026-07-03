@@ -23,7 +23,7 @@ function Navbar({ activeSection, setActiveSection }) {
         <div className="mobile-nav-links">
           <a href="/#home" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('home'); }}>Home</a>
           <a href="/#about" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('about'); }}>Studio</a>
-          <a href="/#services" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('services'); }}>Services</a>
+          <Link to="/services" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('services'); }}>Services</Link>
           <a href="/#projects" onClick={() => { toggleMobileMenu(); setActiveSection && setActiveSection('projects'); }}>Projects</a>
           <Link to="/contact" onClick={toggleMobileMenu}>Contact</Link>
           <a href="/#portal" className="client-portal-btn mobile-client-portal" onClick={toggleMobileMenu}>Client Portal</a>
@@ -50,7 +50,7 @@ function Navbar({ activeSection, setActiveSection }) {
         <div className="nav-links desktop-only">
           <a href="/#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => setActiveSection && setActiveSection('home')}>Home</a>
           <a href="/#about" className={activeSection === 'about' ? 'active' : ''} onClick={() => setActiveSection && setActiveSection('about')}>Studio</a>
-          <a href="/#services" className={activeSection === 'services' ? 'active' : ''} onClick={() => setActiveSection && setActiveSection('services')}>Services</a>
+          <Link to="/services" className={activeSection === 'services' ? 'active' : ''} onClick={() => setActiveSection && setActiveSection('services')}>Services</Link>
           <a href="/#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setActiveSection && setActiveSection('projects')}>Projects</a>
           <Link to="/contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setActiveSection && setActiveSection('contact')}>Contact</Link>
         </div>
