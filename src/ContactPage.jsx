@@ -16,8 +16,8 @@ function ContactPage() {
           <div className="contact-hero-card">
             <div className="contact-hero-bg" />
             <div className="contact-hero-content">
-              <h1 className="contact-hero-title">Meet the Studio Behind the Brands</h1>
-              <p className="contact-hero-sub">A premium branding and website studio rooted in the belief that every business has a story that deserves to be seen, remembered, and felt.</p>
+              <h1 className="contact-hero-title">Contact our friendly team</h1>
+              <p className="contact-hero-sub">Let us know how we can help. Our team is here to support your creative journey and brand evolution.</p>
             </div>
           </div>
         </div>
@@ -25,10 +25,6 @@ function ContactPage() {
         {/* Contact methods section */}
         <div className="contact-methods-section">
           <div className="contact-methods-inner">
-            <div className="contact-methods-top">
-              <h2 className="contact-methods-title">Contact our friendly team</h2>
-              <p className="contact-methods-sub">Let us know how we can help. Our team is here to support your creative journey and brand evolution.</p>
-            </div>
             <div className="contact-cards-grid">
               <div className="contact-card">
                 <div className="contact-card-icon">
