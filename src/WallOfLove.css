@@ -299,6 +299,23 @@
     left: auto;
     transform: none;
     margin-bottom: 32px;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  /* The heading (56px) and cursive "Testimonial" (150px, ~600px wide)
+     overflowed the phone screen and got clipped on both sides. Shrink both
+     to fit. Scoped to .wall-header-wrapper so the shared .cursive-accent
+     used by the Projects section is untouched. */
+  .wall-title {
+    font-size: 34px;
+    margin-bottom: 8px;
+  }
+
+  .wall-header-wrapper .cursive-accent {
+    font-size: 72px;
+    margin-top: -34px;
+    line-height: 1;
   }
 
   .wall-glass-wrapper {
