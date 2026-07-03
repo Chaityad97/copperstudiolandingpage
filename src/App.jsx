@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import CoordinateSection from './CoordinateSection';
 import ProjectsSection from './ProjectsSection';
@@ -8,6 +9,8 @@ import FAQ from './FAQ';
 import Booking from './Booking';
 import Footer from './Footer';
 import ServicesSection from './ServicesSection';
+import Navbar from './Navbar';
+import ContactPage from './ContactPage';
 
 import logoImg from './assets/logo.svg';
 import brand1 from './assets/logos/Group 79.svg';
@@ -178,82 +181,11 @@ function App() {
     };
   }, []);
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  
   const [activeSection, setActiveSection] = useState('home');
 
-  return (
+  const HomePage = () => (
     <>
-      {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-nav-links">
-          <a href="#home" onClick={() => { toggleMobileMenu(); setActiveSection('home'); }}>Home</a>
-          <a href="#about" onClick={() => { toggleMobileMenu(); setActiveSection('about'); }}>Studio</a>
-          <a href="#services" onClick={() => { toggleMobileMenu(); setActiveSection('services'); }}>Services</a>
-          <a href="#projects" onClick={() => { toggleMobileMenu(); setActiveSection('projects'); }}>Projects</a>
-          <a href="#contact" onClick={() => { toggleMobileMenu(); setActiveSection('contact'); }}>Contact</a>
-          <a href="#portal" className="client-portal-btn mobile-client-portal" onClick={toggleMobileMenu}>Client Portal</a>
-          <button className="lets-talk-btn mobile-lets-talk">
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 20h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            Let's Talk &rsaquo;
-          </button>
-        </div>
-      </div>
-
-      {/* Navigation Bar */}
-      <nav className="navbar">
-        <div className="nav-logo">
-          <img src={logoImg} alt="Copper Studio Logo" className="nav-logo-icon" />
-        </div>
-        
-        <div className="nav-divider desktop-only"></div>
-
-        <div className="nav-links desktop-only">
-          <a href="#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => setActiveSection('home')}>Home</a>
-          <a href="#about" className={activeSection === 'about' ? 'active' : ''} onClick={() => setActiveSection('about')}>Studio</a>
-          <a href="#services" className={activeSection === 'services' ? 'active' : ''} onClick={() => setActiveSection('services')}>Services</a>
-          <a href="#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setActiveSection('projects')}>Projects</a>
-          <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setActiveSection('contact')}>Contact</a>
-        </div>
-
-        <div className="nav-divider desktop-only"></div>
-
-        <div className="nav-action desktop-only">
-          <a href="#portal" className="client-portal-link">Client Portal</a>
-          <a href="#contact" className="lets-talk-link">
-            <span className="lets-talk-icon-wrap">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="4" y="5" width="16" height="15" rx="3.5" ry="3.5"></rect>
-                <line x1="16" y1="3" x2="16" y2="7"></line>
-                <line x1="8" y1="3" x2="8" y2="7"></line>
-                <line x1="4" y1="11" x2="20" y2="11"></line>
-                <circle cx="9" cy="15.5" r="1.5" fill="currentColor" stroke="none"></circle>
-              </svg>
-            </span>
-            Let's Talk
-          </a>
-        </div>
-
-        {/* Hamburger Menu Button */}
-        <button className="mobile-menu-btn" onClick={toggleMobileMenu} aria-label="Toggle mobile menu">
-          {isMobileMenuOpen ? (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          ) : (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          )}
-        </button>
-      </nav>
+      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
 
       <div className="landing-container" id="home">
         {/* Background blobs / ellipses */}
@@ -300,7 +232,7 @@ function App() {
           <a href="#projects" className="view-projects-btn">
             View Projects
           </a>
-          <a href="#contact" className="lets-talk-dark-btn">
+          <a href="/contact" className="lets-talk-dark-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 20h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -337,6 +269,13 @@ function App() {
 
       <Footer />
     </>
+  );
+
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/contact" element={<ContactPage />} />
+    </Routes>
   );
 }
 

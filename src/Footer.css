@@ -250,6 +250,21 @@
   margin-bottom: 40px;
 }
 
+.footer-socials-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.footer-social-overlay {
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 2;
+}
+
 /* Crazy good morphed hover animation for social icons */
 .social-icon {
   display: flex;
